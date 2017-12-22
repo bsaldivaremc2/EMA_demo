@@ -214,9 +214,9 @@ plt.show()
 
 # Exponential Moving average (EMA)
 
-Ema formula:
-t=0 -> S=Y
-t>0 -> S = alpha*Yt + (1-alpha)*Yt-1
+Ema formula:  
+t=0 -> S=Y  
+t>0 -> S = alpha*St + (1-alpha)*St-1  
 
 
 ```python
@@ -233,7 +233,7 @@ ema_dic = {}
 for _a in _alpha:
     ema_dic[_a]=[aitv[0]]
     for _ in range(0,aitv.shape[0]-1):
-        _ema = EMA(aitv[_],aitv[_+1],_a)
+        _ema = EMA(ema_dic[_a][_],aitv[_+1],_a)
         ema_dic[_a].append(_ema)
 ```
 
@@ -279,7 +279,7 @@ t = np.arange(0,aitv.shape[0])
 
 for key in sorted(ema_dic.keys()):
     fig=plt.figure(figsize=(16,8))
-    plt.plot(t,aitv,label="Base line")
+    plt.plot(t,aitv,label="Base line",linestyle=':')
     plt.plot(t,ema_dic[key],label="alpha:"+str(np.round(key,2)),c="red")
     plt.legend()
     plt.show()
@@ -325,7 +325,7 @@ for key in sorted(ema_dic.keys()):
 ![png](output_15_9.png)
 
 
-You can see that when alpha is closer to **0.5** it gives equal importance to previous data and current data. When it is closer to 0.0 more importance will be given to previous data and the closer to 1.0 more to current data.
+EMA will soften more the closer it gets to zero.
 
 
 ```python
