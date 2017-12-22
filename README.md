@@ -221,8 +221,14 @@ t>0 -> S = alpha*St + (1-alpha)*St-1
 
 ```python
 #Define EMA
-def EMA(v_prev,v_now,alpha):
-    return alpha*v_now+(1-alpha)*v_prev
+def EMA(iNp,alpha):
+    ema_list=[iNp[0]]
+    for _ in range(0,iNp.shape[0]-1):
+        v_prev = ema_list[_]
+        v_now = iNp[_+1]
+        _ema = alpha*v_now+(1-alpha)*v_prev
+        ema_list.append(_ema)
+    return ema_list
 
 #Create values for alpha
 _alpha = np.linspace(0.1,0.9,10)
@@ -231,10 +237,8 @@ print("Alpha values:\n",_alpha)
 #Get the EMA for different alphas and save the values in a dictionary
 ema_dic = {}
 for _a in _alpha:
-    ema_dic[_a]=[aitv[0]]
-    for _ in range(0,aitv.shape[0]-1):
-        _ema = EMA(ema_dic[_a][_],aitv[_+1],_a)
-        ema_dic[_a].append(_ema)
+    ema_dic[_a]=EMA(aitv,_a)
+
 ```
 
     Alpha values:
