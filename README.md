@@ -281,6 +281,7 @@ for key in sorted(ema_dic.keys()):
     fig=plt.figure(figsize=(16,8))
     plt.plot(t,aitv,label="Base line",linestyle=':')
     plt.plot(t,ema_dic[key],label="alpha:"+str(np.round(key,2)),c="red")
+    plt.title("Exponential Moving Average - EMA/EWMA\n Soften Artificial Intelligence search in Google trends")
     plt.legend()
     plt.show()
 ```
@@ -325,7 +326,7 @@ for key in sorted(ema_dic.keys()):
 ![png](output_15_9.png)
 
 
-EMA will soften more the closer it gets to zero.
+EMA will soften more the closer alpha gets to zero. The closer to zero, more importance will be given to previous data.
 
 
 ```python
